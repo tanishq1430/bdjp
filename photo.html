@@ -118,13 +118,19 @@
 
 <button id="musicBtn">🎵 Play Music</button>
 <style>
-#musicBtn {
+  #musicBtn {
     position: fixed;
     top: 20px;
     right: 20px;
     padding: 10px 15px;
     font-size: 16px;
     cursor: pointer;
+    z-index: 9999;
+    border-radius: 20px;
+    background: #ff4d6d;
+    color: white;
+    border: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
 </style>
 <script>
@@ -142,6 +148,7 @@ btn.addEventListener("click", function () {
 </script>
 </body>
 </html>
+
 
 
 
