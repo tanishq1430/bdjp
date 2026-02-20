@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <body>
   <meta charset="UTF-8">
   <title>Countdown</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
@@ -136,28 +135,6 @@
 
     setInterval(createHeart, 300);
   </script>
- <script>
-const music = document.getElementById("bgMusic");
-
-// Start music on first click anywhere
-document.addEventListener("click", function startMusic() {
-    music.play();
-    document.removeEventListener("click", startMusic);
-});
-
-function nextPage(pageId) {
-    document.getElementById("page1").style.display = "none";
-    document.getElementById("fireworks").style.display = "none";
-    document.getElementById("photo").style.display = "none";
-    document.getElementById("heart").style.display = "none";
-
-    document.getElementById(pageId).style.display = "block";
-}
-</script>  
 </body>
 </html>
-
-
-
-
 
