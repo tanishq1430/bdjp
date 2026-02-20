@@ -2,36 +2,6 @@
 <html lang="en">
 <head>
   <body>
-    <audio id="bgMusic" autoplay loop>
-  <source src="1.mp3" type="audio/mpeg">
-</audio>
-
-<audio id="bgMusic" loop>
-  <source src="1.mp3" type="audio/mpeg">
-</audio>
-
-<!-- PAGE 1 -->
-<div id="page1">
-  <h1>Welcome</h1>
-  <button onclick="nextPage('fireworks')">Start</button>
-</div>
-
-<!-- PAGE 2 -->
-<div id="fireworks" style="display:none;">
-  <h1>Fireworks 🎆</h1>
-  <button onclick="nextPage('photo')">Next</button>
-</div>
-
-<!-- PAGE 3 -->
-<div id="photo" style="display:none;">
-  <h1>Photo 📸</h1>
-  <button onclick="nextPage('heart')">Next</button>
-</div>
-
-<!-- PAGE 4 -->
-<div id="heart" style="display:none;">
-  <h1>Heart ❤️</h1>
-</div>
   <meta charset="UTF-8">
   <title>Countdown</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
@@ -184,13 +154,10 @@ function nextPage(pageId) {
     document.getElementById(pageId).style.display = "block";
 }
 </script> 
-  <script>
-window.addEventListener("click", function () {
-  document.getElementById("bgMusic").play();
-});
-</script>
+ 
 </body>
 </html>
+
 
 
 
