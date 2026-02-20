@@ -102,6 +102,9 @@
   </style>
 </head>
 <body>
+  <audio id="bgMusic" autoplay loop>
+  <source src="1.mp3" type="audio/mpeg">
+</audio>
   <div class="photo-card">
     <img src="https://raw.githubusercontent.com/tanishq1430/imgage/main/Screenshot%202026-02-03%20230357.png" alt="Photo 1"/>
     <img src="https://raw.githubusercontent.com/tanishq1430/imgage/main/Screenshot%202026-02-03%20230459.png" alt="Photo 2"/>
@@ -110,9 +113,14 @@
   </div>
 
   <button class="next-btn" onclick="window.location.href='heart.html'">Next ❤️</button> 
-
+<script>
+window.addEventListener("click", function () {
+  document.getElementById("bgMusic").play();
+});
+</script>
 </body>
 </html>
+
 
 
 
