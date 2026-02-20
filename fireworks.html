@@ -203,34 +203,12 @@
     function goNext() {
       window.location.href = "photo.html";
     }
-<audio id="bgMusic" loop>
-  <source src="1.mp3" type="audio/mpeg">
-</audio>
 
-<script>
-window.addEventListener("load", function () {
-
-    const music = document.getElementById("bgMusic");
-
-    // Try autoplay immediately
-    let playPromise = music.play();
-
-    if (playPromise !== undefined) {
-        playPromise.catch(() => {
-            // If autoplay blocked, start on first user interaction
-            document.addEventListener("click", function startMusic() {
-                music.play();
-                document.removeEventListener("click", startMusic);
-            });
-        });
-    }
-
-});
-</script> 
 
 
 </body>
 </html>
+
 
 
 
