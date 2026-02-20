@@ -117,7 +117,16 @@
 </audio>
 
 <button id="musicBtn">🎵 Play Music</button>
-
+<style>
+#musicBtn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+}
+</style>
 <script>
 const music = document.getElementById("bgMusic");
 const btn = document.getElementById("musicBtn");
@@ -133,5 +142,6 @@ btn.addEventListener("click", function () {
 </script>
 </body>
 </html>
+
 
 
