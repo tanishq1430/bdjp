@@ -102,9 +102,6 @@
   </style>
 </head>
 <body>
-  <audio id="bgMusic" autoplay loop>
-  <source src="1.mp3" type="audio/mpeg">
-</audio>
   <div class="photo-card">
     <img src="https://raw.githubusercontent.com/tanishq1430/imgage/main/Screenshot%202026-02-03%20230357.png" alt="Photo 1"/>
     <img src="https://raw.githubusercontent.com/tanishq1430/imgage/main/Screenshot%202026-02-03%20230459.png" alt="Photo 2"/>
@@ -113,13 +110,44 @@
   </div>
 
   <button class="next-btn" onclick="window.location.href='heart.html'">Next ❤️</button> 
+<audio id="bgMusic" loop>
+  <source src="1.mp3" type="audio/mpeg">
+</audio>
+
+<button id="musicBtn">🎵 Play Music</button>
+  <style>
+    #musicBtn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    z-index: 9999;
+    border-radius: 20px;
+    background: #ff4d6d;
+    color: white;
+    border: none;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+  </style>
+
 <script>
-window.addEventListener("click", function () {
-  document.getElementById("bgMusic").play();
+const music = document.getElementById("bgMusic");
+const btn = document.getElementById("musicBtn");
+
+btn.addEventListener("click", function () {
+    music.play().then(() => {
+        console.log("Music started");
+        btn.style.display = "none";
+    }).catch((err) => {
+        console.log("Error:", err);
+    });
 });
 </script>
 </body>
 </html>
+
 
 
 
