@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
   <body>
+    <audio id="bgMusic" autoplay loop>
+  <source src="1.mp3" type="audio/mpeg">
+</audio>
 
 <audio id="bgMusic" loop>
   <source src="1.mp3" type="audio/mpeg">
@@ -181,7 +184,13 @@ function nextPage(pageId) {
     document.getElementById(pageId).style.display = "block";
 }
 </script> 
+  <script>
+window.addEventListener("click", function () {
+  document.getElementById("bgMusic").play();
+});
+</script>
 </body>
 </html>
+
 
 
