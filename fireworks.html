@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fireworks</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Poppins:wght@600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: radial-gradient(circle at bottom, #000, #0a0a0a 80%);
+      overflow: hidden;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      color: #fff;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    h1.happy {
+      position: absolute;
+      top: 35%;
+      text-align: center;
+      font-family: 'Lobster', cursive;
+      font-size: 5rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      color: #fff;
+      text-shadow:
+        0 0 25px #ff1493,
+        0 0 50px #ff69b4,
+        0 0 100px #ff80ab,
+        0 0 150px #ff00ff;
+      animation: glow 2s ease-in-out infinite alternate;
+      z-index: 2;
+    }
+
+    @keyframes glow {
+      0% {
+        text-shadow:
+          0 0 25px #ff1493,
+          0 0 50px #ff69b4,
+          0 0 100px #ff80ab;
+      }
+      100% {
+        text-shadow:
+          0 0 40px #ff00ff,
+          0 0 80px #ff1493,
+          0 0 120px #ff69b4;
+      }
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    /* Next Button */
+    .next-btn {
+      display: none;
+      position: absolute;
+      bottom: 10%;
+      padding: 15px 40px;
+      font-size: 1.5rem;
+      background: linear-gradient(45deg, #ff4081, #ff80ab);
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 0 20px rgba(255, 64, 129, 0.6);
+      transition: all 0.3s ease;
+      animation: pulse 1.5s infinite;
+      z-index: 3;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+    }
+
+    .next-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 35px rgba(255, 64, 129, 0.9);
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+      100% { transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+  <h1 class="happy">Happy Birthday Japneet 🥳🎂</h1>
+  <canvas id="fireworks"></canvas>
+  <button class="next-btn" id="nextBtn" onclick="goNext()">Next 💖</button>
+
+  <script>
+    const canvas = document.getElementById('fireworks');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const fireworks = [];
+    const particles = [];
+
+    class Firework {
+      constructor(x, y, targetY, color) {
+        this.x = x;
+        this.y = y;
+        this.targetY = targetY;
+        this.color = color;
+        this.speed = 4;
+      }
+      update() {
+        this.y -= this.speed;
+        if (this.y <= this.targetY) {
+          this.explode();
+          return true;
+        }
+        return false;
+      }
+      explode() {
+        for (let i = 0; i < 50; i++) {
+          particles.push(new Particle(this.x, this.y, this.color));
+        }
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, 3, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.fill();
+      }
+    }
+
+    class Particle {
+      constructor(x, y, color) {
+        this.x = x;
+        this.y = y;
+        this.color = color;
+        this.speedX = (Math.random() - 0.5) * 6;
+        this.speedY = (Math.random() - 0.5) * 6;
+        this.alpha = 1;
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        this.alpha -= 0.02;
+        return this.alpha <= 0;
+      }
+      draw() {
+        ctx.globalAlpha = this.alpha;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, 2, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.fill();
+        ctx.globalAlpha = 1;
+      }
+    }
+
+    function animate() {
+      ctx.fillStyle = "rgba(0, 0, 0, 0.15)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Launch new fireworks
+      if (Math.random() < 0.05) {
+        const x = Math.random() * canvas.width;
+        const y = canvas.height;
+        const targetY = Math.random() * canvas.height / 2;
+        const color = `hsl(${Math.random() * 360}, 100%, 60%)`;
+        fireworks.push(new Firework(x, y, targetY, color));
+      }
+
+      // Update fireworks
+      for (let i = fireworks.length - 1; i >= 0; i--) {
+        if (fireworks[i].update()) fireworks.splice(i, 1);
+        else fireworks[i].draw();
+      }
+
+      // Update particles
+      for (let i = particles.length - 1; i >= 0; i--) {
+        if (particles[i].update()) particles.splice(i, 1);
+        else particles[i].draw();
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+
+    // Show "Next" button after few seconds of fireworks
+    setTimeout(() => {
+      document.getElementById("nextBtn").style.display = "inline-block";
+    }, 4000);
+
+    function goNext() {
+      window.location.href = "photo.html";
+    }
+  </script>
+</body>
+</html>

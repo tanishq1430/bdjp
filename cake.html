@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cake Blow</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      font-family: 'Poppins', sans-serif;
+      background: radial-gradient(circle at bottom, #f0f8ff, #add8e6, #87cefa);
+      overflow: hidden;
+    }
+
+    .center {
+      text-align: center;
+    }
+
+    /* Realistic Cake Image */
+    .cake {
+      position: relative;
+      width: 280px;
+      height: 280px;
+      background: url('/image/5.png') center/contain no-repeat;
+      filter: drop-shadow(0 8px 15px rgba(0,0,0,0.3));
+      animation: floatCake 3s ease-in-out infinite;
+    }
+
+    @keyframes floatCake {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    /* Candle on top of cake */
+    .candle {
+      position: absolute;
+      top: -60px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 20px;
+      height: 80px;
+      background: repeating-linear-gradient(45deg, #FFD700, #FFD700 8px, #98fb98 8px, #98fb98 16px);
+      border-radius: 8px;
+      box-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+    }
+
+    /* Flame */
+    .flame {
+      position: absolute;
+      top: -40px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 25px;
+      height: 35px;
+      background: radial-gradient(circle, #ffeb3b, #ff9800, #ff5722);
+      border-radius: 50% 50% 40% 40%;
+      animation: flicker 0.15s infinite alternate;
+      transition: opacity 0.8s ease;
+      filter: blur(0.8px);
+    }
+
+    @keyframes flicker {
+      0% { transform: translateX(-50%) scale(1); opacity: 0.9; }
+      100% { transform: translateX(-50%) scale(1.1); opacity: 1; }
+    }
+
+    @keyframes blowOut {
+      0% { transform: translateX(-50%) scale(1); opacity: 1; }
+      50% { transform: translateX(-50%) scale(1.3); opacity: 0.5; }
+      100% { transform: translateX(-50%) scale(0.1); opacity: 0; }
+    }
+
+    /* Buttons */
+    .blow-btn, .next-btn {
+      margin-top: 40px;
+      padding: 14px 36px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 40px;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s ease;
+      box-shadow: 0 0 15px rgba(30,144,255,0.5);
+    }
+
+    .blow-btn {
+      background: linear-gradient(45deg, #00bfff, #1e90ff);
+    }
+    .blow-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px rgba(30,144,255,0.8);
+    }
+
+    .next-btn {
+      display: none;
+      background: linear-gradient(45deg, #1e90ff, #00bfff);
+      font-size: 1.5rem;
+      padding: 15px 40px;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    .next-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 30px rgba(30, 144, 255, 0.8);
+    }
+  </style>
+</head>
+<body>
+  <div class="center">
+    <div class="cake">
+      <div class="candle">
+        <div class="flame" id="flame"></div>
+      </div>
+    </div>
+
+    <button class="blow-btn" onclick="blowCandle()">Blow Candle 🎂</button>
+    <button class="next-btn" id="nextBtn" onclick="goNext()">Next 🎆</button>
+  </div>
+
+  <script>
+    function blowCandle() {
+      const flame = document.getElementById("flame");
+      flame.style.animation = "blowOut 1.5s forwards";
+      setTimeout(() => {
+        flame.style.display = "none";
+        document.querySelector(".blow-btn").style.display = "none";
+        document.getElementById("nextBtn").style.display = "inline-block";
+      }, 1500);
+    }
+
+    function goNext() {
+      window.location.href = "fireworks.html";
+    }
+  </script>
+</body>
+</html>

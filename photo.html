@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Photo Message</title>
+  <style>
+    body {
+      background: radial-gradient(circle, #ffccff, #ff99cc);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .photo-card {
+      position: relative;
+      background: #fff;
+      padding: 25px;
+      border-radius: 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+      display: flex;
+      gap: 20px;
+      animation: fadeIn 1.5s ease-in;
+    }
+
+    .photo-card img {
+      width: 280px;
+      height: 280px;
+      object-fit: cover;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+      transition: transform 0.4s ease;
+    }
+
+    .photo-card img:hover {
+      transform: scale(1.05);
+    }
+
+    .float-msg {
+      position: absolute;
+      bottom: -80px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 16px;
+      color: #000000;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+      animation: moveUp 4s ease-in-out forwards;
+    }
+
+    @keyframes moveUp {
+      0% { bottom: -60px; opacity: 0; }
+      50% { opacity: 1; }
+      100% { bottom: 320px; opacity: 1; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .next-btn {
+      margin-top: 100px;
+      padding: 14px 45px;
+      background: linear-gradient(45deg, #ff4081, #ff80ab);
+      color: white;
+      border: none;
+      border-radius: 35px;
+      font-size: 20px;
+      cursor: pointer;
+      box-shadow: 0 6px 15px rgba(255, 64, 129, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    .next-btn:hover {
+      background: linear-gradient(45deg, #ff1e70, #ff69b4);
+      transform: scale(1.08);
+      box-shadow: 0 8px 20px rgba(255, 64, 129, 0.6);
+    }
+
+    .music-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 25px;
+      background: #ff80ab;
+      color: white;
+      cursor: pointer;
+      font-size: 14px;
+      box-shadow: 0 0 10px rgba(255, 128, 171, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    .music-btn:hover {
+      background: #ff4d94;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <div class="photo-card">
+    <img src="https://raw.githubusercontent.com/tanishq1430/imgage/main/Screenshot%202026-02-03%20230357.png" alt="Photo 1"/>
+    <img src="https://raw.githubusercontent.com/tanishq1430/imgage/main/Screenshot%202026-02-03%20230459.png" alt="Photo 2"/>
+    <img src="https://raw.githubusercontent.com/tanishq1430/imgage/c0f227bc1e5bc70f07c1abed9a5a7f703bfe9ecb/zzz.png" alt="Photo 3"/>
+    <div class="float-msg">May your heart always feel as full as you make others feel 💗🌷</div>
+  </div>
+
+  <button class="next-btn" onclick="window.location.href='heart.html'">Next ❤️</button>
+
+  <!-- Background Music -->
+  <audio id="bgMusic" loop>
+  <source src="music/1.mp3" type="audio/mpeg">
+</audio>
+
+  <!-- Fallback Button for browsers blocking autoplay -->
+  <button class="music-btn" id="musicBtn">🎵 Play Music</button>
+
+  <script>
+    const music = document.getElementById('bgMusic');
+    const btn = document.getElementById('musicBtn');
+
+    // Try autoplay, if blocked, show button
+    document.addEventListener('DOMContentLoaded', () => {
+      const playPromise = music.play();
+      if (playPromise !== undefined) {
+        playPromise.then(() => {
+          btn.style.display = 'none';
+        }).catch(() => {
+          btn.style.display = 'block';
+        });
+      }
+    });
+
+    btn.addEventListener('click', () => {
+      music.play();
+      btn.style.display = 'none';
+    });
+  </script>
+</body>
+</html>
