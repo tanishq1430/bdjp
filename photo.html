@@ -116,30 +116,22 @@
   <source src="1.mp3" type="audio/mpeg">
 </audio>
 
-  <!-- Fallback Button for browsers blocking autoplay -->
-  <button class="music-btn" id="musicBtn">🎵 Play Music</button>
+<button id="musicBtn">🎵 Play Music</button>
 
-  <script>
-    const music = document.getElementById('bgMusic');
-    const btn = document.getElementById('musicBtn');
+<script>
+const music = document.getElementById("bgMusic");
+const btn = document.getElementById("musicBtn");
 
-    // Try autoplay, if blocked, show button
-    document.addEventListener('DOMContentLoaded', () => {
-      const playPromise = music.play();
-      if (playPromise !== undefined) {
-        playPromise.then(() => {
-          btn.style.display = 'none';
-        }).catch(() => {
-          btn.style.display = 'block';
-        });
-      }
+btn.addEventListener("click", function () {
+    music.play().then(() => {
+        console.log("Music started");
+        btn.style.display = "none";
+    }).catch((err) => {
+        console.log("Error:", err);
     });
-
-    btn.addEventListener('click', () => {
-      music.play();
-      btn.style.display = 'none';
-    });
-  </script>
+});
+</script>
 </body>
 </html>
+
 
